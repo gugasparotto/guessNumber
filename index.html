@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+	</head>
+		<body>
+			<div class="output">
+				<div class="message">
+				</div>
+				<input type="number">
+				<button> Advinhar</button>
+			</div>
+
+		
+		<script>
+			let game={"min":1,"max":10 };
+			
+			document.addEventListener("DOMContentLoaded", function(){
+			console.log("pronto");		
+			game.output= document.querySelector(".output");
+			game.message=document.querySelector(".message");
+			game.advinharInput = document.querySelector("input");
+			game.btn = document.querySelector("button");
+			game.btn.addEventListener("click", guessValue);
+			init();
+			})
+			function guessValue(){
+				let tempGuess= game.advinharInput.value;
+				tempGuess=parseInt(tempGuess);
+				
+				if(isNaN(tempGuess)){
+				message("por favor digite um numero", "red");
+				} 
+				else if (tempGuess === game.num){
+				message("numero correto", "green");
+				game.advinharInput.style.borderColor="green";
+				}
+				else {
+				let holder= tempGuess> game.num ?
+					{"c":"blue","m":"é menor"} : 
+					{"c":"purple","m":"é maior"};
+				message(holder.m +""+ game.num, holder.c);
+				game.advinharInput.style.borderColor="holder.c";
+				}
+				console.log(tempGuess);
+			}
+			function init(){
+			game.num=ranNumber(game.min,game.max);
+			let tempMes=("Bem vindo ao jogo. Advinhe um numero de " +game.min+ "até " +game.max );
+			message(tempMes);
+			}
+			function ranNumber(min,max){
+			return Math.floor(Math.random()*(max - min +1)+min);
+			
+			}
+			function message(mes,clr){
+				game.message.innerHTML=mes;
+				game.message.style.color=clr ||"red";
+			}
+			
+		</script>
+	
+
+		</body>
+
+
+
+
+</html>
